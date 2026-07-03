@@ -35,7 +35,7 @@ interface AIResponse {
 // ============================================
 // ROTA DO CHAT IA
 // ============================================
-app.post("/api/chat", async (req, res) => {
+app.post("/api/chat", async (req: Request, res: Response) => {
   const { mensagem, historico } = req.body;
 
   console.log('💬 Chat - Mensagem recebida:', mensagem);
@@ -261,7 +261,7 @@ Gere um RELATÓRIO TÉCNICO DE PERÍCIA ECONÔMICA DE CONTRATOS BANCÁRIOS, cont
 // ============================================
 // ROTA PARA GERAR RELATÓRIOS
 // ============================================
-app.post("/api/gerar-relatorios", async (req, res) => {
+app.post("/api/gerar-relatorios", async (req: Request, res: Response) => {
   const { dados, servicos_interesse, submissao_id, tipo_servico } = req.body;
 
   console.log('='.repeat(50));
@@ -523,7 +523,7 @@ app.get("/api/relatorios/:submissao_id", async (req: Request, res: Response) => 
 // ============================================
 // ROTA PARA LISTAR TODOS OS RELATÓRIOS
 // ============================================
-app.get("/api/relatorios", async (req, res) => {
+app.get("/api/relatorios", async (req: Request, res: Response) => {
   try {
     const { data, error } = await supabase
       .from('relatorios_gerados')
@@ -540,8 +540,8 @@ app.get("/api/relatorios", async (req, res) => {
 // ============================================
 // ROTA DE HEALTH CHECK (para manter o servidor acordado)
 // ============================================
-app.get("/api/health", (req, res) => {
-  res.json({ 
+app.get("/api/health", (req: Request, res: Response) => {
+  res.json({
     status: "ok", 
     timestamp: new Date().toISOString(),
     ambiente: process.env.NODE_ENV || 'development'
