@@ -1,8 +1,9 @@
 // server/index.ts
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
+
 
 dotenv.config({ path: `.env.${process.env.NODE_ENV || 'development'}` });
 
@@ -17,6 +18,7 @@ const supabase = createClient(
 
 app.use(cors());
 app.use(express.json());
+
 
 // Interface para a resposta da API de IA
 interface AIResponse {
@@ -500,7 +502,7 @@ INSTRUÇÕES IMPORTANTES:
 // ============================================
 // ROTA PARA BUSCAR RELATÓRIOS DE UMA SUBMISSÃO
 // ============================================
-app.get("/api/relatorios/:submissao_id", async (req, res) => {
+app.get("/api/relatorios/:submissao_id", async (req: Request, res: Response) => {
   const { submissao_id } = req.params;
 
   try {
